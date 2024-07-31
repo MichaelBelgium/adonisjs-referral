@@ -17,5 +17,10 @@ import { stubsRoot } from './stubs/main.js'
 
 export async function configure(_command: ConfigureCommand) {
   const codemods = await _command.createCodemods()
+
+  await codemods.makeUsingStub(stubsRoot, 'migrations/create_db.stub', {
+    prefix: new Date().getTime(),
+  })
+
   await codemods.makeUsingStub(stubsRoot, 'configs/referrals.stub', {})
 }
