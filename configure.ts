@@ -23,4 +23,8 @@ export async function configure(_command: ConfigureCommand) {
   })
 
   await codemods.makeUsingStub(stubsRoot, 'configs/referrals.stub', {})
+
+  await codemods.updateRcFile((rcFile) => {
+    rcFile.addProvider('@michaelbelgium/adonisjs-referral/referral_provider')
+  })
 }

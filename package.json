@@ -17,7 +17,8 @@
   ],
   "exports": {
     ".": "./build/index.js",
-    "./types": "./build/src/types.js"
+    "./types": "./build/src/types.js",
+    "./referral_provider": "./build/providers/referral_provider.js",
     "./mixins/has_referrals": "./build/src/mixins/has_referrals.js"
   },
   "scripts": {
