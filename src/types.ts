@@ -1,4 +1,5 @@
 import { LucidModel } from '@adonisjs/lucid/types/model'
+import ReferralCode from './models/referral_code.js'
 
 export interface ReferralConfig {
   referralCodeLength: number
@@ -10,4 +11,10 @@ export interface ReferralConfig {
     referral_codes: string
   }
   userModel: LucidModel
+}
+
+declare module '@adonisjs/core/types' {
+  interface EventsList {
+    'referral:visited': ReferralCode
+  }
 }
