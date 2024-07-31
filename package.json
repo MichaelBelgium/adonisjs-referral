@@ -18,6 +18,7 @@
   "exports": {
     ".": "./build/index.js",
     "./types": "./build/src/types.js"
+    "./mixins/has_referrals": "./build/src/mixins/has_referrals.js"
   },
   "scripts": {
     "clean": "del-cli build",
