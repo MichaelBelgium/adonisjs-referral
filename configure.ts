@@ -27,4 +27,8 @@ export async function configure(_command: ConfigureCommand) {
   await codemods.updateRcFile((rcFile) => {
     rcFile.addProvider('@michaelbelgium/adonisjs-referral/referral_provider')
   })
+
+  await codemods.registerMiddleware('named', [
+    { name: 'referred', path: '@michaelbelgium/adonisjs-referral/referred_middelware' },
+  ])
 }
