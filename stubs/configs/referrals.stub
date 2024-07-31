@@ -1,0 +1,21 @@
+{{{
+  exports({
+    to: app.configPath('referrals.ts')
+  })
+}}}
+
+import { ReferralConfig } from '@michaelbelgium/adonisjs-referral/types'
+import User from '#models/user'
+
+const referralConfig: ReferralConfig = {
+  referralCodeLength: 8,
+  cookieName: 'referral',
+  cookieExpire: '30d',
+  tables: {
+    referrals: 'referrals',
+    referral_codes: 'referral_codes'
+  },
+  userModel: User,
+}
+
+export default referralConfig

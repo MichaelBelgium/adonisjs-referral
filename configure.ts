@@ -13,5 +13,9 @@
 */
 
 import ConfigureCommand from '@adonisjs/core/commands/configure'
+import { stubsRoot } from './stubs/main.js'
 
-export async function configure(_command: ConfigureCommand) {}
+export async function configure(_command: ConfigureCommand) {
+  const codemods = await _command.createCodemods()
+  await codemods.makeUsingStub(stubsRoot, 'configs/referrals.stub', {})
+}
