@@ -13,7 +13,7 @@ export default class RolePermissionProvider {
 
     router
       .get(
-        `${this.app.config.get('referrals.routerPrefix', '')}/referral/:code`,
+        `${this.app.config.get('referrals.referralLink.prefix', '')}/referral/:code`,
         async ({ params, response }: HttpContext) => {
           const code = await ReferralCode.findByOrFail('code', params.code)
 
@@ -26,9 +26,9 @@ export default class RolePermissionProvider {
 
           emitter.emit('referral:visited', code)
 
-          response.redirect('/')
+          response.redirect(this.app.config.get('referrals.referralLink.redirect', '/'))
         }
       )
-      .as('referral.handle')
+      .as('referral.link')
   }
 }

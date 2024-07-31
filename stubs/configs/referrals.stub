@@ -8,14 +8,45 @@ import { ReferralConfig } from '@michaelbelgium/adonisjs-referral/types'
 import User from '#models/user'
 
 const referralConfig: ReferralConfig = {
-  referralCodeLength: 8,
+  /**
+   * The length of the referral code (default 8)
+   */
+  //referralCodeLength: 8,
+
+  /**
+   * The unique name of the cookie that will be set
+   */
   cookieName: 'referral',
+
+  /**
+   * The amount of days the cookie will be valid
+   */
   cookieExpire: '30d',
+
+  /**
+   * The table names to use in the migration
+   */
   tables: {
     referrals: 'referrals',
     referral_codes: 'referral_codes'
   },
+
+  /**
+   * The model class where to link referrals to
+   */
   userModel: User,
+
+  referralLink: {
+    /**
+     * The prefix to use for the referral link
+     */
+    //prefix: '',
+
+    /**
+     * The route to redirect to after a referral link is visited (default '/')
+     */
+    //redirect: '/register',
+  }
 }
 
 export default referralConfig
