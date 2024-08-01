@@ -2,7 +2,10 @@ import { LucidModel } from '@adonisjs/lucid/types/model'
 import ReferralCode from './models/referral_code.js'
 
 export interface ReferralConfig {
-  referralCodeLength?: number
+  referralCode: {
+    length?: number
+    autoCreate?: boolean
+  }
   cookieName: string
   cookieExpire: string
   referralLink: {

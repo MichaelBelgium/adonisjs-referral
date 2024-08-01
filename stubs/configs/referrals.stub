@@ -8,10 +8,17 @@ import { ReferralConfig } from '@michaelbelgium/adonisjs-referral/types'
 import User from '#models/user'
 
 const referralConfig: ReferralConfig = {
-  /**
-   * The length of the referral code (default 8)
-   */
-  //referralCodeLength: 8,
+  referralCode: {
+    /**
+     * The length of the referral code (default 8)
+     */
+    //length: 8,
+
+    /**
+     * Automaticly create a referralcode when userModel gets created (default true)
+     */
+    //autoCreate: false
+  },
 
   /**
    * The unique name of the cookie that will be set
