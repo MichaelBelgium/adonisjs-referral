@@ -2,20 +2,19 @@ import { DateTime } from 'luxon'
 import { afterCreate, BaseModel, beforeCreate, belongsTo, column } from '@adonisjs/lucid/orm'
 import ReferralCodeGenerator from '../helpers/referral_code_generator.js'
 import emitter from '@adonisjs/core/services/emitter'
-import { ReferralConfig } from '../types.js'
 import { BelongsTo } from '@adonisjs/lucid/types/relations'
+import config from '@adonisjs/core/services/config'
+import { LucidModel } from '@adonisjs/lucid/types/model'
 
 export default class ReferralCode extends BaseModel {
-  static config: ReferralConfig
-
   @column({ isPrimary: true })
   declare id: number
 
   @column()
   declare userId: number
 
-  @belongsTo(() => ReferralCode.config.userModel)
-  declare user: BelongsTo<typeof ReferralCode.config.userModel>
+  @belongsTo(() => config.get('referral.userModel') as LucidModel)
+  declare user: BelongsTo<LucidModel>
 
   @column()
   declare code: string
