@@ -8,3 +8,4 @@
 */
 
 export { configure } from './configure.js'
+export { hasReferrals } from './src/mixins/has_referrals.js'

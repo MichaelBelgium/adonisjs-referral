@@ -19,7 +19,6 @@
     ".": "./build/index.js",
     "./types": "./build/src/types.js",
     "./referral_provider": "./build/providers/referral_provider.js",
-    "./mixins/has_referrals": "./build/src/mixins/has_referrals.js",
     "./referred_middelware": "./build/src/middleware/referred_middleware.js"
   },
   "scripts": {
