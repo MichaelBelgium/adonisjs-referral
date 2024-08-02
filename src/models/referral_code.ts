@@ -21,7 +21,7 @@ export default class ReferralCode extends BaseModel {
   @column()
   declare userId: number
 
-  @belongsTo(() => config.get<LucidModel>('referral.userModel'))
+  @belongsTo(() => config.get<LucidModel>('referrals.userModel'))
   declare user: BelongsTo<LucidModel>
 
   @column()

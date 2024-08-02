@@ -15,7 +15,7 @@ export function hasReferrals<T extends NormalizeConstructor<typeof BaseModel>>(s
 
     @afterCreate()
     static async createReferralCode(model: InstanceType<typeof ModelWithReferrals>) {
-      if (config.get<boolean>('referral.referralCode.autoCreate', true)) {
+      if (config.get<boolean>('referrals.referralCode.autoCreate', true)) {
         ReferralCode.create({ userId: model.getModelId() })
       }
     }
