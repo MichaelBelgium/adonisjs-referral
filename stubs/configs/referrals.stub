@@ -29,15 +29,7 @@ const referralConfig: ReferralConfig = {
    * The amount of days the cookie will be valid
    */
   cookieExpire: '30d',
-
-  /**
-   * The table names to use in the migration
-   */
-  tables: {
-    referrals: 'referrals',
-    referral_codes: 'referral_codes'
-  },
-
+  
   /**
    * The model class where to link referrals to
    */

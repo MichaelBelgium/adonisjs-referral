@@ -12,10 +12,6 @@ export interface ReferralConfig {
     prefix?: string
     redirect?: string
   }
-  tables: {
-    referrals: string
-    referral_codes: string
-  }
   userModel: LucidModel
 }
 

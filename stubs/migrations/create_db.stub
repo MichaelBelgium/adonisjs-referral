@@ -8,7 +8,7 @@ import config from '@adonisjs/core/services/config'
 
 export default class extends BaseSchema {
   async up() {
-    this.schema.createTable(config.get('referrals.tables.referral_codes'), (table) => {
+    this.schema.createTable('referral_codes', (table) => {
       table.increments('id')
       table.integer('user_id').notNullable().unsigned().references('id').inTable(config.get('referrals.userModel.table')).onDelete('CASCADE').onUpdate('CASCADE')
       table.string('code', 8).unique().notNullable()
@@ -16,9 +16,9 @@ export default class extends BaseSchema {
       table.timestamp('created_at')
     })
 
-    this.schema.createTable(config.get('referrals.tables.referrals'), (table) => {
+    this.schema.createTable('referrals', (table) => {
       table.increments('id')
-      table.integer('referral_code_id').unsigned().references('id').inTable(config.get('referrals.tables.referral_codes')).onDelete('CASCADE').onUpdate('CASCADE')
+      table.integer('referral_code_id').unsigned().references('id').inTable('referral_codes').onDelete('CASCADE').onUpdate('CASCADE')
       table.integer('user_id').unsigned().references('id').inTable(config.get('referrals.userModel.table')).onDelete('CASCADE').onUpdate('CASCADE')
       table.json('meta_data')
       table.timestamp('created_at')
@@ -26,7 +26,7 @@ export default class extends BaseSchema {
   }
 
   async down() {
-    this.schema.dropTable(config.get('referrals.tables.referral_codes'))
-    this.schema.dropTable(config.get('referrals.tables.referrals'))
+    this.schema.dropTable('referral_codes')
+    this.schema.dropTable('referrals')
   }
 }
