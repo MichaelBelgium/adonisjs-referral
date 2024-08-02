@@ -10,7 +10,7 @@ export function hasReferrals<T extends NormalizeConstructor<typeof BaseModel>>(s
       throw new Error('Method getModelId not implemented.')
     }
 
-    @hasOne(() => ReferralCode)
+    @hasOne(() => ReferralCode, { foreignKey: 'userId' })
     declare referralCode: HasOne<typeof ReferralCode>
 
     @afterCreate()
