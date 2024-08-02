@@ -43,6 +43,6 @@ export default class ReferralCode extends BaseModel {
 
   @afterCreate()
   static async emitCodeCreated(referralCode: ReferralCode) {
-    emitter.emit('referral::code_created', referralCode)
+    emitter.emit('referral:code_created', referralCode)
   }
 }

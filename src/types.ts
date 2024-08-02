@@ -18,6 +18,6 @@ export interface ReferralConfig {
 declare module '@adonisjs/core/types' {
   interface EventsList {
     'referral:visited': ReferralCode
-    'referral::code_created': ReferralCode
+    'referral:code_created': ReferralCode
   }
 }
