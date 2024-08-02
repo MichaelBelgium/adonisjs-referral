@@ -27,6 +27,6 @@ export default class Referral extends BaseModel {
   @belongsTo(() => ReferralCode)
   declare referralCode: BelongsTo<typeof ReferralCode>
 
-  @belongsTo(() => config.get<LucidModel>('referrals.userModel'))
+  @belongsTo(() => config.get<LucidModel>('referrals.userModel'), { foreignKey: 'referredUserId' })
   declare referredUser: BelongsTo<LucidModel>
 }
