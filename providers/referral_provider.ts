@@ -14,19 +14,26 @@ export default class RolePermissionProvider {
     router
       .get(
         `${this.app.config.get('referrals.referralLink.prefix', '')}/referral/:code`,
-        async ({ params, response }: HttpContext) => {
+        async ({ params, request, response }: HttpContext) => {
+          const redirect = this.app.config.get<string>('referrals.referralLink.redirect', '/')
+          const cookieName = this.app.config.get<string>('referrals.cookieName')
+
+          if (request.cookie(cookieName)) {
+            return response.redirect(redirect)
+          }
+
           const code = await ReferralCode.findByOrFail('code', params.code)
 
           code.visits++
           await code.save()
 
-          response.cookie(this.app.config.get('referrals.cookieName'), params.code, {
+          response.cookie(cookieName, params.code, {
             maxAge: this.app.config.get('referrals.cookieExpire'),
           })
 
           emitter.emit('referral:visited', code)
 
-          response.redirect(this.app.config.get('referrals.referralLink.redirect', '/'))
+          response.redirect(redirect)
         }
       )
       .as('referral.link')
