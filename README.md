@@ -64,3 +64,15 @@ The package provides 2 events [you can listen to](https://docs.adonisjs.com/guid
 
 * `referral:code_created`: emitted when a referral code is created
 * `referral:visited`: emitted when a referral code is visited through the referral link.
+
+## Middleware
+
+You can use the `referred` middleware to only allow referred users on a route.
+
+```TS
+router.get('/only-referrals', async ({ }: HttpContext) => {
+    return 'Hello referred user!'
+}).middleware(middleware.referred())
+```
+
+The middleware basicly checks if the user has the referred cookie set. Will show unauthorized HTTP error when not having the cookie.
