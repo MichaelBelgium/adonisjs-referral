@@ -6,17 +6,13 @@ import config from '@adonisjs/core/services/config'
 
 export function hasReferrals<T extends NormalizeConstructor<typeof BaseModel>>(superclass: T) {
   class ModelWithReferrals extends superclass {
-    getModelId(): number {
-      throw new Error('Method getModelId not implemented.')
-    }
-
     @hasOne(() => ReferralCode, { foreignKey: 'userId' })
     declare referralCode: HasOne<typeof ReferralCode>
 
     @afterCreate()
-    static async createReferralCode(model: InstanceType<typeof ModelWithReferrals>) {
+    static async createReferralCode(model: ModelWithReferrals) {
       if (config.get<boolean>('referrals.referralCode.autoCreate', true)) {
-        ReferralCode.create({ userId: model.getModelId() })
+        await model.related('referralCode').create({})
       }
     }
   }

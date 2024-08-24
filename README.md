@@ -39,22 +39,16 @@ The LucidModel you've set in the `userModel` setting must have the `hasReferrals
 This will add these properties and functions to the model:
 
 ```TS
-getModelId(): number {
-  throw new Error('Method getModelId not implemented.')
-}
-
 @hasOne(() => ReferralCode, { foreignKey: 'userId' })
 declare referralCode: HasOne<typeof ReferralCode>
 
 @afterCreate()
-static async createReferralCode(model: InstanceType<typeof ModelWithReferrals>) {
-  if (config.get<boolean>('referral.referralCode.autoCreate', true)) {
-    ReferralCode.create({ userId: model.getModelId() })
+static async createReferralCode(model: ModelWithReferrals) {
+  if (config.get<boolean>('referrals.referralCode.autoCreate', true)) {
+    model.related('referralCode').create({})
   }
 }
 ```
-
-Important note: if you have `referralCode.autoCreate` enabled, you must override `getModelId`.
 
 ## Referrals vs referral codes
 
