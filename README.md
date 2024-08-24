@@ -32,11 +32,23 @@ The configuration file has some options that can be edited. Each option has a co
 
 See [the stub file](https://github.com/MichaelBelgium/adonisjs-referral/blob/main/stubs/configs/referrals.stub) or the `config/referrals.ts` file after adding the package.
 
+Before you're starting with referrals, make sure the configuration is absolutely correct.
+
 ## hasReferrals mixin
 
 The LucidModel you've set in the `userModel` setting must have the `hasReferrals` mixin added.
 
-This will add these properties and functions to the model:
+For example if you have the `User` model set:
+```TS
+import { compose } from '@adonisjs/core/helpers'
+import { hasReferrals } from '@michaelbelgium/adonisjs-referral'
+
+export default class User extends compose(BaseModel, hasReferrals) {
+  //...
+}
+```
+
+This will add an `afterCreate` hook and a relationship to the model:
 
 ```TS
 @hasOne(() => ReferralCode, { foreignKey: 'userId' })
@@ -52,7 +64,7 @@ static async createReferralCode(model: ModelWithReferrals) {
 
 ## Referrals vs referral codes
 
-The package does not know when you want to assign a referred user to the user who shared the referral link. It's your decision as it could be after registering, after paying a subscription, when ever.
+The package does **not** know when you want to assign a user (the referee) to the user who shared the referral link (the referrer). It's *your decision* as it could be after registering, after paying a subscription, when ever.
 
 So while the package handles saving and creating of referral codes, you must add and assign referrals yourself. 
 
